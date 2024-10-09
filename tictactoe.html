@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe Game</title>
+    <style>
+      body {
+        background-color: #081d22f9;
+      }
+      .maindivcontainer {
+        margin-top: 50px;
+        width: 400px;
+        height: 400px;
+        /* background-color: rgb(128, 136, 126); */
+        border-radius: 6px;
+        border: 2px solid #4c4545;
+        box-shadow: 2px 2px 4px #2f3131f9, -2px -2px 4px #303131f9;
+        padding: 5px 25px;
+      }
+      .container1 {
+        display: flex;
+        /* width: 400px; */
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+      .container2 {
+        display: flex;
+        justify-content: space-between;
+        /* width: 400px; */
+        margin-top: 30px;
+      }
+      .container3 {
+        display: flex;
+        /* width: 400px; */
+        justify-content: space-between;
+        margin-top: 30px;
+      }
+      .box1,
+      .box2,
+      .box3 {
+        width: 100px;
+        height: 100px;
+        background-color: #0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 60px;
+        color: white;
+      }
+      .box1,
+      .box2,
+      .box3 {
+        background-color: #f00;
+        color: white;
+        border-radius: 6px;
+      }
+      .box3 {
+        background-color: cyan;
+      }
+      .vertica-line1 {
+        border-left: 3px solid white;
+        height: 370px;
+        position: absolute;
+        margin-left: 122px;
+        box-shadow: 0 0 5px yellow, 0 0 10px yellow, 0 0 15px yellow,
+          0 0 20px rgb(9, 253, 5), 0 0 25px rgb(30, 5, 253), 0 0 30px cyan,
+          0 0 35px cyan, 0 0 50px yellow;
+      }
+      .vertica-line2 {
+        border-right: 4px solid white;
+        height: 370px;
+        position: absolute;
+        margin-left: 270px;
+        box-shadow: 0 0 5px rgb(190, 4, 4), 0 0 10px rgb(214, 52, 52),
+          0 0 15px rgb(142, 4, 4), 0 0 20px rgb(9, 253, 5),
+          0 0 25px rgb(30, 5, 253), 0 0 30px rgb(253, 5, 5),
+          0 0 35px rgb(253, 5, 5), 0 0 50px rgb(253, 5, 5);
+      }
+      .horizontal-line1 {
+        border-bottom: 4px solid white;
+        width: 400px;
+        position: absolute;
+        margin-top: 115px;
+        box-shadow: 0 0 5px rgb(16, 190, 4), 0 0 10px rgb(23, 214, 26),
+          0 0 15px rgb(13, 142, 4), 0 0 20px rgb(253, 199, 5),
+          0 0 25px rgb(5, 253, 5), 0 0 30px rgb(79, 253, 5),
+          0 0 35px rgb(30, 253, 5), 0 0 50px rgb(5, 253, 187);
+      }
+      .horizontal-line2 {
+        border-bottom: 4px groove white;
+        width: 400px;
+        position: absolute;
+        margin-top: 245px;
+        box-shadow: 0 0 5px rgb(4, 109, 190), 0 0 10px rgb(214, 52, 182),
+          0 0 15px rgb(142, 4, 114), 0 0 20px rgb(166, 253, 5),
+          0 0 25px rgb(253, 5, 204), 0 0 30px rgb(253, 5, 204),
+          0 0 35px rgb(253, 5, 204), 0 0 50px rgb(253, 5, 204);
+      }
+      #tictac {
+        background: linear-gradient(
+          to bottom,
+          red,
+          blue,
+          green,
+          cyan,
+          rgb(255, 0, 221),
+          yellow
+        );
+        /* background-color: #0f0; */
+        -webkit-background-clip: text;
+        -webkit-text-stroke: 4px transparent;
+      }
+      #datasave {
+        color: white;
+      }
+      @media only screen and (max-width: 480px) {
+        .maindivcontainer {
+          width: 290px;
+        }
+        .vertica-line1 {
+          height: 370px;
+          margin-left: 105px;
+        }
+        .vertica-line2 {
+          height: 370px;
+          margin-left: 200px;
+        }
+        .horizontal-line1 {
+          width: 300px;
+        }
+        .horizontal-line2 {
+          width: 300px;
+        }
+        .box1,
+        .box2,
+        .box3 {
+          width: 90px;
+          height: 90px;
+          position: relative;
+          top: 10px;
+          left: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <h1 id="tictac" style="color: white">
+        Tic Tac Toe<br /><i>Created by Shailesh Maurya</i>
+      </h1>
+    </center>
+    <center>
+      <h2 style="color: white">Player 1 is = X</h2>
+      <h2 style="color: white">Player 2 is = O</h2>
+      <h1 id="result" style="color: #0f0"></h1>
+    </center>
+    <center>
+      <div class="maindivcontainer">
+        <div class="container1">
+          <div
+            onclick="shownumclick('box1')"
+            id="box1"
+            style="background: none"
+            class="box1"
+          ></div>
+          <div class="vertica-line1"></div>
+          <div class="horizontal-line1"></div>
+          <div
+            onclick="shownumclick('box2')"
+            id="box2"
+            style="background: none"
+            class="box2"
+          ></div>
+          <div class="vertica-line2"></div>
+          <div class="horizontal-line2"></div>
+          <div
+            onclick="shownumclick('box3')"
+            id="box3"
+            style="background: none"
+            class="box3"
+          ></div>
+        </div>
+        <div class="container2">
+          <div
+            onclick="shownumclick('box4')"
+            id="box4"
+            style="background: none"
+            class="box1"
+          ></div>
+          <div
+            onclick="shownumclick('box5')"
+            id="box5"
+            style="background: none"
+            class="box2"
+          ></div>
+          <div
+            onclick="shownumclick('box6')"
+            id="box6"
+            style="background: none"
+            class="box3"
+          ></div>
+        </div>
+        <div class="container3">
+          <div
+            onclick="shownumclick('box7')"
+            id="box7"
+            style="background: none"
+            class="box1"
+          ></div>
+          <div
+            onclick="shownumclick('box8')"
+            id="box8"
+            style="background: none"
+            class="box2"
+          ></div>
+          <div
+            onclick="shownumclick('box9')"
+            id="box9"
+            style="background: none"
+            class="box3"
+          ></div>
+        </div>
+      </div>
+      <h1><ol id="datasave"></ol></h1>
+    </center>
+
+    <script>
+      let history = "";
+      let winners = false;
+      let sc = true;
+      function shownumclick(sk) {
+        let data = document.getElementById(sk).innerHTML;
+        if (winners) {
+          alert("Game Over.");
+          reset();
+          return;
+        }
+        if (data == "") {
+          if (sc) {
+            document.getElementById(sk).innerHTML = "X";
+            document.getElementById(sk).style.background = "orangered";
+            sc = false;
+            // document.getElementById(sk).style.background = 'rgba(255,255,255,0.6)';
+          } else {
+            document.getElementById(sk).innerHTML = "O";
+            sc = true;
+            document.getElementById(sk).style.background =
+              "rgba(255,255,255,0.6)";
+            document.getElementById(sk).style.color = "orangered";
+          }
+        }
+        let box1 = document.getElementById("box1").innerHTML;
+        let box2 = document.getElementById("box2").innerHTML;
+        let box3 = document.getElementById("box3").innerHTML;
+        let box4 = document.getElementById("box4").innerHTML;
+        let box5 = document.getElementById("box5").innerHTML;
+        let box6 = document.getElementById("box6").innerHTML;
+        let box7 = document.getElementById("box7").innerHTML;
+        let box8 = document.getElementById("box8").innerHTML;
+        let box9 = document.getElementById("box9").innerHTML;
+
+        if (
+          (box1 == "X" && box2 == "X" && box3 == "X") ||
+          (box1 == "O" && box2 == "O" && box3 == "O")
+        ) {
+          if (box1 == "X") {
+            // document.getElementById('result').innerHTML = 'Player 1 is Winner.';
+            playerwinner(1);
+          } else {
+            // document.getElementById('result').innerHTML = 'Player 2 is Winner.';
+            playerwinner(2);
+          }
+        } else if (
+          (box4 == "X" && box5 == "X" && box6 == "X") ||
+          (box4 == "O" && box5 == "O" && box6 == "O")
+        ) {
+          if (box4 == "X") {
+            // document.getElementById('result').innerHTML = 'Player 1 is Winner.';
+            playerwinner(1);
+          } else {
+            // document.getElementById('result').innerHTML = 'Player 2 is Winner.';
+            playerwinner(2);
+          }
+        } else if (
+          (box7 == "X" && box8 == "X" && box9 == "X") ||
+          (box7 == "O" && box8 == "O" && box9 == "O")
+        ) {
+          if (box7 == "X") {
+            // document.getElementById('result').innerHTML = 'Player 1 is Winner.';
+            playerwinner(1);
+          } else {
+            // document.getElementById('result').innerHTML = 'Player 2 is Winner.';
+            playerwinner(2);
+          }
+        } else if (
+          (box1 == "X" && box4 == "X" && box7 == "X") ||
+          (box1 == "O" && box4 == "O" && box7 == "O")
+        ) {
+          if (box1 == "X") {
+            // document.getElementById('result').innerHTML = 'Player 1 is Winner.';
+            playerwinner(1);
+          } else {
+            // document.getElementById('result').innerHTML = 'Player 2 is Winner.';
+            playerwinner(2);
+          }
+        } else if (
+          (box2 == "X" && box5 == "X" && box8 == "X") ||
+          (box2 == "O" && box5 == "O" && box8 == "O")
+        ) {
+          if (box2 == "X") {
+            // document.getElementById('result').innerHTML = 'Player 1 is Winner.';
+            playerwinner(1);
+          } else {
+            // document.getElementById('result').innerHTML = 'Player 2 is Winner.';
+            playerwinner(2);
+          }
+        } else if (
+          (box3 == "X" && box6 == "X" && box9 == "X") ||
+          (box3 == "O" && box6 == "O" && box9 == "O")
+        ) {
+          if (box3 == "X") {
+            // document.getElementById('result').innerHTML = 'Player 1 is Winner.';
+            playerwinner(1);
+          } else {
+            // document.getElementById('result').innerHTML = 'Player 2 is Winner.';
+            playerwinner(2);
+          }
+        } else if (
+          (box1 == "X" && box5 == "X" && box9 == "X") ||
+          (box1 == "O" && box5 == "O" && box9 == "O")
+        ) {
+          if (box1 == "X") {
+            // document.getElementById('result').innerHTML = 'Player 1 is Winner.';
+            playerwinner(1);
+          } else {
+            // document.getElementById('result').innerHTML = 'Player 2 is Winner.';
+            playerwinner(2);
+          }
+        } else if (
+          (box3 == "X" && box5 == "X" && box7 == "X") ||
+          (box3 == "O" && box5 == "O" && box7 == "O")
+        ) {
+          if (box3 == "X") {
+            // document.getElementById('result').innerHTML = 'Player 1 is Winner.';
+            playerwinner(1);
+          } else {
+            // document.getElementById('result').innerHTML = 'Player 2 is Winner.';
+            playerwinner(2);
+          }
+        } else if (
+          box1 != "" &&
+          box2 != "" &&
+          box3 != "" &&
+          box4 != "" &&
+          box5 != "" &&
+          box6 != "" &&
+          box7 != "" &&
+          box8 != "" &&
+          box9 != ""
+        ) {
+          document.getElementById("result").innerHTML = "X & O DRAW";
+          history += "<li>" + "X & O DRAW" + "</li>";
+          document.getElementById("datasave").innerHTML = history;
+          winners = true;
+        }
+      }
+      function playerwinner(Player) {
+        document.getElementById("result").innerHTML =
+          "Player " + Player + " is Winner.";
+        history += "<li>" + "Player " + Player + " is Winner" + "</li>";
+        document.getElementById("datasave").innerHTML = history;
+        winners = true;
+      }
+
+      function reset() {
+        document.getElementById("box1").innerHTML = "";
+        document.getElementById("box1").style.background = "none";
+        document.getElementById("box2").innerHTML = "";
+        document.getElementById("box2").style.background = "none";
+        document.getElementById("box3").innerHTML = "";
+        document.getElementById("box3").style.background = "none";
+        document.getElementById("box4").innerHTML = "";
+        document.getElementById("box4").style.background = "none";
+        document.getElementById("box5").innerHTML = "";
+        document.getElementById("box5").style.background = "none";
+        document.getElementById("box6").innerHTML = "";
+        document.getElementById("box6").style.background = "none";
+        document.getElementById("box7").innerHTML = "";
+        document.getElementById("box7").style.background = "none";
+        document.getElementById("box8").innerHTML = "";
+        document.getElementById("box8").style.background = "none";
+        document.getElementById("box9").innerHTML = "";
+        document.getElementById("box9").style.background = "none";
+        winners = false;
+        sc = true;
+      }
+    </script>
+  </body>
+</html>
